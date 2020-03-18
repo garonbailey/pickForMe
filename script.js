@@ -1,7 +1,7 @@
 "use strict";
 
 //elements
-let containerDiv, inputArea, submitBtn, aboutBtn, modal, loadingDiv, resultDiv, footerDiv;
+let containerDiv, inputArea, submitBtn, aboutBtn, modal, loadingDiv, resultDiv;
 let currentDate = new Date();
 let currentYear = currentDate.getFullYear();
 
@@ -101,6 +101,4 @@ window.onload = () => {
 	modal = document.querySelector('#about-info');
 	loadingDiv = document.querySelector('#loading');
 	resultDiv = document.querySelector('#your-guidance');
-	footerDiv = document.querySelector('#footer');
-	footerDiv.innerText = "Created in " + currentYear + " by Garon Bailey"
 }
