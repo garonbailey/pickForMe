@@ -1,7 +1,7 @@
 "use strict";
 
 //elements
-let containerDiv, inputArea, submitBtn, aboutBtn, aboutInfo, loadingDiv, resultDiv, footerDiv;
+let containerDiv, inputArea, submitBtn, aboutBtn, modal, loadingDiv, resultDiv, footerDiv;
 let currentDate = new Date();
 let currentYear = currentDate.getFullYear();
 
@@ -76,15 +76,20 @@ const makeChoice = () => {
 }
 
 const showAbout = () => {
-	aboutInfo.classList.remove("invisible");
-	aboutInfo.classList.add("visible");
+	modal.style.display = "block";
 	containerDiv.classList.add("dim");
 }
 
 const closeAbout = () => {
-	aboutInfo.classList.remove("visible");
-	aboutInfo.classList.add("invisible");
+	modal.style.display = "none";
 	containerDiv.classList.remove("dim");
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
 }
 
 //get elements and set variables after page load
@@ -93,7 +98,7 @@ window.onload = () => {
 	inputArea = document.querySelector('#choices-input');
 	submitBtn = document.querySelector('#choice-submit');
 	aboutBtn = document.querySelector('#about-button');
-	aboutInfo = document.querySelector("#about-info");
+	modal = document.querySelector('#about-info');
 	loadingDiv = document.querySelector('#loading');
 	resultDiv = document.querySelector('#your-guidance');
 	footerDiv = document.querySelector('#footer');
