@@ -28,7 +28,7 @@ const validateInput = () => {
 	} else {
 		validationRes = {
 			valid: true,
-			message: (inputCount === 1)?", but you only gave us one option! You could've chosen that!":"!"
+			message: (inputCount === 1)?", but you only gave us one option! You didn't need us!":"!"
 		}
 	}
 	return validationRes;
