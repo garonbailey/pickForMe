@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>We'll pick for you</title>
+	<link href='https://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div id="container">
+		<div class="header">
+			<div id="title">
+				<h1>Pick for me!</h1>
+			</div>
+			<div id="about-button" class="button" onclick="showAbout()">About</div>
+		</div>
+		<div class="main">
+			<div class="form">
+				<p>Enter your choices below.</p>
+				<span id="input-note">Please comma separate all of your choices.</span>
+				<div class="space"></div>
+				<textarea id="choices-input"></textarea>
+				<div class="space"></div>
+				<div class="button" id="choice-submit" onclick="makeChoice()">Tell me my choice!</div>
+			</div>
+			<div id="result">
+				<div id="loading" class="invisible"></div>
+				<div id="your-guidance"></div>
+			</div>
+			<div id="footer"></div>
+		</div>
+	</div>
+	<div id="about-info" class="invisible">
+				<p>Born out of a crippling inability to make a choice, we've harnessed to awesome power of JavaScript Math functions to help guide you to a decision!</p>
+				<div class="space"></div>
+				<p>We are not liable for any bad choices you follow through on. Don't let really simple pieces of code rule your life, friend.</p>
+				<div class="space"></div>
+				<p class="disclaimer">This over-simplified website is for really ridiculous and fleeting entertainment only</p>
+				<div id="modal-btn" class="button" onclick="closeAbout()">Close</div>
+			</div>
+	<script src="script.js"></script>
+</body>
+</html>
