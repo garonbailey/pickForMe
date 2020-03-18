@@ -7,7 +7,7 @@ let currentYear = currentDate.getFullYear();
 
 //functions
 const splitChoices = () => {
-	return inputArea.value.replace(" ", "").split(',');
+	return inputArea.value.split(',');
 }
 
 const selectOption = (choices) => {
