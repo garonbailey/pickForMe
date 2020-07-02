@@ -10,10 +10,25 @@ const splitChoices = () => {
 	return inputArea.value.split(',');
 }
 
-const selectOption = (choices) => {
-	let optionCount = choices.length;
-	let choiceIndex = Math.floor(Math.random() * optionCount);
-	return choices[choiceIndex];
+const shuffleChoices = (choices) => {
+	//implementation using a Fisher-Yates shuffle algorithm
+	let array = [...choices];
+	let m = array.length,
+		t,
+		i;
+
+	// While there remain elements to shuffle
+	while (m) {
+		// Pick a remaining element
+		i = Math.floor(Math.random() * m--);
+
+		// Swap it with the current element.
+		t = array[m];
+		array[m] = array[i];
+		array[i] = t;
+	}
+
+	return array;
 }
 
 const validateInput = () => {
@@ -35,7 +50,7 @@ const validateInput = () => {
 }
 
 const makeChoice = () => {
-	resultDiv.innerText = "";
+	resultDiv.innerHTML = "";
 	const displayResult = (fromInvalid) => {
 		if (!fromInvalid) {
 			loadingDiv.innerText = "";
@@ -49,12 +64,12 @@ const makeChoice = () => {
 			loadingDiv.innerText = dispNum;
 			setTimeout(displayResult, 1000);
 		} else if (dispNum === 1) {
-			loadingDiv.innerText = dispNum;
+			loadingDiv.innerText = `Your selection in ${dispNum}...`;
 			setTimeout(function () {
 				updateLoadingDiv("Go!")
 			}, 1000);
 		} else {
-			loadingDiv.innerText = dispNum;
+			loadingDiv.innerText = `Your selection in ${dispNum}...`;
 			setTimeout(function () {
 				updateLoadingDiv(dispNum - 1)
 			}, 1000);
@@ -66,8 +81,59 @@ const makeChoice = () => {
 	if (validationResult.valid) {
 		loadingDiv.classList.remove("invisible");
 		let choiceArray = splitChoices();
-		let selection = selectOption(choiceArray);
+		let selection = shuffleChoices(choiceArray)[0];
 		resultDisplay = "Your choice is " + selection + validationResult.message;
+		updateLoadingDiv(3);
+	} else {
+		resultDisplay = validationResult.message;
+		displayResult(true);
+	}
+}
+
+const rankChoices = () => {
+	resultDiv.innerHTML = "";
+	let rankingDisplay = document.createElement('ol');
+	rankingDisplay.setAttribute('type', '1');
+	let resultDisplay;
+	const displayResult = (fromInvalid) => {
+		if (!fromInvalid) {
+			loadingDiv.innerText = "";
+			loadingDiv.classList.add("invisible");
+			resultDiv.append(rankingDisplay);
+		} else {
+			resultDiv.innerText = resultDisplay;
+			
+		}
+	}
+
+	const updateLoadingDiv = dispNum => {
+		if (dispNum === "Go!") {
+			loadingDiv.innerText = dispNum;
+			setTimeout(displayResult, 1000);
+		} else if (dispNum === 1) {
+			loadingDiv.innerText = `Your choice ranking in ${dispNum}...`;
+			setTimeout(function () {
+				updateLoadingDiv("Go!")
+			}, 1000);
+		} else {
+			loadingDiv.innerText = `Your choice ranking in ${dispNum}...`;
+			setTimeout(function () {
+				updateLoadingDiv(dispNum - 1)
+			}, 1000);
+		}
+	}
+
+	let validationResult = validateInput();
+	if (validationResult.valid) {
+		loadingDiv.classList.remove("invisible");
+		let choiceArray = splitChoices();
+		let rankings = shuffleChoices(choiceArray);
+		for (let i = 0; i < 3; i++) {
+			let listItem = document.createElement('li');
+			let itemText = document.createTextNode(rankings[i]);
+			listItem.appendChild(itemText);
+			rankingDisplay.append(listItem);
+		}
 		updateLoadingDiv(3);
 	} else {
 		resultDisplay = validationResult.message;
