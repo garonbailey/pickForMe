@@ -21,7 +21,10 @@
 				<div class="space"></div>
 				<textarea id="choices-input" style="font-size: 1.4em"></textarea>
 				<div class="space"></div>
-				<div class="button" id="choice-submit" onclick="makeChoice()">Tell me my choice!</div>
+				<div class="buttons">
+					<div class="button" id="choice-submit" onclick="makeChoice()">Tell me my choice!</div>
+					<div class="button" id="choice-rank" onclick="rankChoices()">Or, Rank Top 3!</div>
+				</div>
 			</div>
 			<div id="result">
 				<div id="loading" class="invisible"></div>
@@ -32,7 +35,7 @@
 	</div>
 	<div id="about-info" class="modal">
 		<div class="modal-content">
-			<p>Born out of a crippling inability to make a choice, we've harnessed the awesome power of JavaScript Math functions to help guide you to a decision!</p>
+			<p>Born out of a crippling inability to make a choice, we've harnessed the awesome power of JavaScript to help guide you to a decision!</p>
 			<div class="space"></div>
 			<p>We are not liable for any bad choices you follow through on. Don't let really simple pieces of code rule your life, friend.</p>
 			<div class="space"></div>
