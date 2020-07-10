@@ -81,12 +81,8 @@ const makeChoice = () => {
 	if (validationResult.valid) {
 		loadingDiv.classList.remove("invisible");
 		let choiceArray = splitChoices();
-		let selection;
-		if (choiceArray.length === 1) {
-			selection = choiceArray[0];
-		} else {
-			selection = shuffleChoices(choiceArray)[Math.floor(Math.random() * choiceArray.length)];
-		}
+		let choiceIndex = (choiceArray.length < 3)?0:Math.floor(Math.random() * choiceArray.length);
+		let selection = shuffleChoices(choiceArray)[choiceIndex];
 		resultDisplay = "Your choice is " + selection + validationResult.message;
 		updateLoadingDiv(3);
 	} else {
