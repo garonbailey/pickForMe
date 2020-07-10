@@ -117,7 +117,10 @@ li {
 }
 
 #choice-submit, #choice-rank {
-	width: 140px;
+	min-width: 140px;
+	padding-left: 3px;
+	padding-right: 3px;
+	margin-top: 5px;
 }
 
 #choice-rank {
