@@ -38,7 +38,7 @@ const validateInput = () => {
 	if (inputVal.length < 1) {
 		validationRes = {
 			valid: false,
-			message: "Please enter some choices!"
+			message: "Gimme something to work with here!"
 		}
 	} else {
 		validationRes = {
@@ -81,7 +81,12 @@ const makeChoice = () => {
 	if (validationResult.valid) {
 		loadingDiv.classList.remove("invisible");
 		let choiceArray = splitChoices();
-		let selection = shuffleChoices(choiceArray)[0];
+		let selection;
+		if (choiceArray.length === 1) {
+			selection = choiceArray[0];
+		} else {
+			selection = shuffleChoices(choiceArray)[Math.floor(Math.random() * choiceArray.length)];
+		}
 		resultDisplay = "Your choice is " + selection + validationResult.message;
 		updateLoadingDiv(3);
 	} else {
@@ -95,8 +100,15 @@ const rankChoices = () => {
 	let rankingDisplay = document.createElement('ol');
 	rankingDisplay.setAttribute('type', '1');
 	let resultDisplay;
+	let numberOfChoices;
 	const displayResult = (fromInvalid) => {
 		if (!fromInvalid) {
+			if (numberOfChoices === 1) {
+				let comeOn = document.createElement('p');
+				let comeOnText = document.createTextNode("One option isn't difficult to rank, but . . . ");
+				comeOn.append(comeOnText);
+				resultDiv.append(comeOn);
+			}
 			loadingDiv.innerText = "";
 			loadingDiv.classList.add("invisible");
 			resultDiv.append(rankingDisplay);
@@ -127,8 +139,9 @@ const rankChoices = () => {
 	if (validationResult.valid) {
 		loadingDiv.classList.remove("invisible");
 		let choiceArray = splitChoices();
+		numberOfChoices = (choiceArray.length >= 3)?3:choiceArray.length;
 		let rankings = shuffleChoices(choiceArray);
-		for (let i = 0; i < 3; i++) {
+		for (let i = 0; i < numberOfChoices; i++) {
 			let listItem = document.createElement('li');
 			let itemText = document.createTextNode(rankings[i]);
 			listItem.appendChild(itemText);
